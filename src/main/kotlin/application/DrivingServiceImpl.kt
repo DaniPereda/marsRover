@@ -1,35 +1,26 @@
 package application
 
 import domain.Rover
-import domain.SettingsRepository
-import domain.Settings
-import application.ConfigService
-import infra.database.SettingsRepositoryInMemory
+import java.util.*
 
 class DrivingServiceImpl:DrivingService {
 
-
-
-    override fun startTrip(countryKey:String, orders:String): String{
-        var settings = retrieveSettings(countryKey)
-
-        var rover = Rover(settings=settings)
+    override fun startTrip(orders:String): String{
+        var rover = Rover()
 
         var listOrders = orders.toList()
         for (order in listOrders){
-            when(order.uppercaseChar()){
-                rover.settings.move   -> go(rover)
-                rover.settings.left -> turnRight(rover)
-                rover.settings.right -> turnLeft(rover)
+            when(order){
+                'M'   -> go(rover)
+                'L' -> turnRight(rover)
+                'R' -> turnLeft(rover)
             }
         }
         return getRoverPosition(rover)
     }
 
     private fun getRoverPosition(rover: Rover) =
-        "${rover.x}:${rover.y}:${arrayOf(rover.settings.nord, rover.settings.east, rover.settings.south, rover.settings.west)[rover.facing]}"
-
-    private fun retrieveSettings(countryKey:String): Settings = SettingsRepositoryInMemory().retrieveRoverSettings(countryKey)
+        "${rover.x}:${rover.y}:${arrayOf("N", "E", "S", "W")[rover.facing]}"
 
     private fun turnLeft(rover: Rover)
     {

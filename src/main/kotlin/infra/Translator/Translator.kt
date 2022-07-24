@@ -7,7 +7,6 @@ class Translator(private val country:String = "USA"){
 
     fun translate (orders:String):String
     {
-        //Construimos diccionario
         if (myDictionary.isNotEmpty()) {
             var translatedOrders = ""
             var listOrders = orders.uppercase().toList()
@@ -20,7 +19,7 @@ class Translator(private val country:String = "USA"){
         return orders
     }
 
-    fun buildTranslationTable()
+    fun buildTranslationMap()
     {
 
         val dictionaryStorage = mapOf("USA" to arrayOf('N','E','S','W','M','L','R'), "URSS" to arrayOf('A','B','C','D','X','Y','Z'))

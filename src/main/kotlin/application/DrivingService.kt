@@ -3,7 +3,7 @@ package application
 
 interface DrivingService {
 
-    fun startTrip(orders:String):String
+    fun startTrip(country:String, orders:String):String
 
 
 

@@ -23,9 +23,10 @@ class Translator(private val country:String = "USA"){
     {
 
         val dictionaryStorage = mapOf("USA" to arrayOf('N','E','S','W','M','L','R'), "URSS" to arrayOf('A','B','C','D','X','Y','Z'))
-        var myKeys = dictionaryStorage.getOrDefault(country, arrayOf())
 
-        if(myKeys.isNotEmpty() && country != "USA")
+        var myKeys = dictionaryStorage.getOrDefault(country, dictionaryStorage.getValue("USA"))
+
+        if(myKeys.isNotEmpty())
         {
             for ( i in 0..3){
                 myDictionary[(dictionaryStorage["USA"])!![i]] = myKeys[i]
@@ -35,6 +36,7 @@ class Translator(private val country:String = "USA"){
                 myDictionary[myKeys[i]] = (dictionaryStorage["USA"])!![i]
             }
         }
+
 
     }
 

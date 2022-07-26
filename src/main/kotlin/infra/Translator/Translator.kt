@@ -1,43 +1,27 @@
 package infra.Translator
 
+import domain.ITranslator
 
-class Translator(private val country:String = "USA"){
 
-    var myDictionary:MutableMap<Char, Char> = mutableMapOf()
+class Translator():ITranslator{
 
-    fun translate (orders:String):String
+    override fun translateOrders(country: String, orders: String): String
     {
-        if (myDictionary.isNotEmpty()) {
-            var translatedOrders = ""
-            var listOrders = orders.uppercase().toList()
-            for (order in listOrders) {
-                translatedOrders += (myDictionary.getOrDefault(order, order))
+        val translationMapOrders = DictionaryStorage().retrieveTranslationMapOrders(country)
+        var translatedOrders = ""
 
-            }
-            return translatedOrders
-        }
-        return orders
-    }
-
-    fun buildTranslationMap()
-    {
-
-        val dictionaryStorage = mapOf("USA" to arrayOf('N','E','S','W','M','L','R'), "URSS" to arrayOf('A','B','C','D','X','Y','Z'))
-
-        var myKeys = dictionaryStorage.getOrDefault(country, dictionaryStorage.getValue("USA"))
-
-        if(myKeys.isNotEmpty())
+        for(order in orders)
         {
-            for ( i in 0..3){
-                myDictionary[(dictionaryStorage["USA"])!![i]] = myKeys[i]
-            }
-            for ( i in 4..6)
-            {
-                myDictionary[myKeys[i]] = (dictionaryStorage["USA"])!![i]
-            }
+            translatedOrders += translationMapOrders[order]
         }
 
-
+        return translatedOrders
     }
+
+    override fun translateDirection(country:String, direction:Char):Char
+    {
+        return DictionaryStorage().retrieveTranslationMapDirections(country).getOrDefault(direction, direction)
+    }
+
 
 }

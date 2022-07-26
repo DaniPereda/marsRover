@@ -1,33 +1,37 @@
 package application
 import infra.Translator.Translator
 
-import domain.Rover
-import java.util.*
+import domain.*
 
 class DrivingServiceImpl:DrivingService {
 
     override fun startTrip(country:String, orders:String): String{
-
-
-        var translator = Translator(country)
-        translator.buildTranslationMap()
+        val translator = Translator()
+        var translatedOrders = translator.translateOrders(country, orders)
 
         var rover = Rover()
 
-        var listOrders = translator.translate(orders).toList()
-
-        for (order in listOrders){
+        for (order in translatedOrders){
             when(order){
-                'M'   -> rover.move()
-                'L' -> rover.turnRight()
-                'R' -> rover.turnLeft()
+                Orders.MOVE.defaultValue  -> rover.move()
+                Orders.LEFT.defaultValue -> rover.turnLeft()
+                Orders.RIGHT.defaultValue -> rover.turnRight()
             }
         }
-        return getRoverPosition(rover)
+
+        return getRoverPosition(country, rover)    }
+
+    private fun getRoverPosition(country:String, rover: Rover):String{
+
+        val direction = getNSEW(rover)
+        val translatedDirection = Translator().translateDirection(country, direction)
+        return "${rover.x}:${rover.y}:$translatedDirection"
+
     }
 
-    private fun getRoverPosition(rover: Rover) =
-        "${rover.x}:${rover.y}:${rover.getNSEW()}"
+
+
+    private fun getNSEW(rover: Rover) = arrayOf(Directions.NORTH.defaultValue, Directions.EAST.defaultValue, Directions.SOUTH.defaultValue, Directions.WEST.defaultValue)[rover.facing]
 
 
 

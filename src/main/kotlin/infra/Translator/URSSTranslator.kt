@@ -5,18 +5,18 @@ import domain.Orders
 import domain.PositionWithDirection
 import domain.Translator
 
-class USTranslator : Translator {
+class URSSTranslator : Translator {
     private enum class RowDirections(val value: Char) {
-        NORTH('N'),
-        SOUTH('S'),
-        EAST('E'),
-        WEST('W'),
+        NORTH('A'),
+        SOUTH('B'),
+        EAST('C'),
+        WEST('D'),
     }
 
     private enum class RowOrders(val value: Char) {
-        MOVE('M'),
-        LEFT('L'),
-        RIGHT('R'),
+        MOVE('X'),
+        LEFT('Y'),
+        RIGHT('Z'),
     }
 
     override fun translateDirection(rowDirection: Char): Directions {

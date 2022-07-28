@@ -1,13 +1,10 @@
 
-import application.DrivingServiceImpl
+import application.MainApplication
+import infra.Translator.*
+import infra.comunicator.*
 
 fun main(args: Array<String>) {
 
-    var country = "URSS"
-    var orders = "XYXXXX"
-
-
-
-    println(DrivingServiceImpl().startTrip(country, orders))
+       MainApplication(HardcodeComunicator(), USTranslator()).start()
 
 }

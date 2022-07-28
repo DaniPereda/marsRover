@@ -6,7 +6,8 @@ import domain.Size
 
 class ConsoleComunicator() : Communicator {
     override fun retrieveOrders(): String {
-        println("Indique las ordenes a ejecutar")
+        println("Welcome to the order rover comunicator")
+        println("Please, write the orders to communicate")
         return readLine().toString()
     }
 
@@ -20,14 +21,23 @@ class ConsoleComunicator() : Communicator {
         return Position(x, y)
     }
 
-    override fun retrieveInitialRowDirection(): String {
-        println("Please, Enter the rover facing direction (N-S-E-W)")
-        return readLine().toString()
+    override fun retrieveInitialRowDirection(): Char {
+        println("Please, Enter the rover facing direction ")
+        return readLine()!!.toCharArray()[0]
     }
 
 
-
     override fun retrieveSizeMap(): Size {
+        println("Welcome to the map sizing communicator")
+        println("Please, enter the width of your map")
+        val width = readLine()!!.toInt()
+        println("Please, enter the height of your map")
+        val height = readLine()!!.toInt()
 
+        return Size(width, height)
+    }
+
+    override fun printPositionWithDirection(formattedPositionWithDirection: String) {
+        println("y la posicion es  $formattedPositionWithDirection")
     }
 }

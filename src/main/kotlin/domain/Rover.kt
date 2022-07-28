@@ -1,13 +1,22 @@
 package domain
 class Rover(var positionWithDirection:PositionWithDirection = PositionWithDirection(Position(0,0),Directions.NORTH)) {
 
+    fun executeOrder(order:Orders)
+    {
+        when (order)
+        {
+            Orders.MOVE -> goAhead()
+            Orders.LEFT -> turnLeft()
+            Orders.RIGHT -> turnRight()
+        }
+    }
     fun goAhead()
     {
         when(positionWithDirection.direction){
             Directions.NORTH -> goNorth()
-            Directions.SOUTH -> goNorth()
-            Directions.EAST -> goNorth()
-            Directions.WEST -> goNorth()
+            Directions.SOUTH -> goSouth()
+            Directions.EAST -> goEast()
+            Directions.WEST -> goWest()
         }
     }
 

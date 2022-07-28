@@ -5,7 +5,8 @@ interface Communicator {
 
     fun retrieveInitialPosition():Position
 
-    fun retrieveInitialRowDirection():String
+    fun retrieveInitialRowDirection():Char
 
     fun retrieveSizeMap():Size
+    fun printPositionWithDirection(formattedPositionWithDirection:String)
 }

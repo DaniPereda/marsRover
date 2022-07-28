@@ -1,10 +1,12 @@
 package application
+import domain.*
 
+import domain.PositionWithDirection
 
-interface DrivingService {
+class DrivingService {
 
-    fun startTrip(country:String, orders:String):String
-
-
-
+    fun landRover(positionWithDirection: PositionWithDirection)
+    {
+        if()
+    }
 }

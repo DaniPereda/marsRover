@@ -1,44 +1,67 @@
 package domain
+class Rover(var positionWithDirection:PositionWithDirection = PositionWithDirection(Position(0,0),Directions.NORTH)) {
 
-data class Rover(var x:Int = 0,
-        var y:Int = 0,
-        var facing:Int = 0) {
+    fun goAhead()
+    {
+        when(positionWithDirection.direction){
+            Directions.NORTH -> goNorth()
+            Directions.SOUTH -> goNorth()
+            Directions.EAST -> goNorth()
+            Directions.WEST -> goNorth()
+        }
+    }
 
-        private val size = 10
-        private val numDirections = 4
-        fun turnLeft()
+    private fun goNorth() {
+        positionWithDirection.position.y += 1
+    }
+    private fun goSouth() {
+        positionWithDirection.position.y -= 1
+    }
+    private fun goEast() {
+        positionWithDirection.position.x += 1
+    }
+    private fun goWest() {
+        positionWithDirection.position.x -=1
+    }
+
+    fun turnRight()
+    {
+        when(positionWithDirection.direction)
         {
-                facing = (facing + 3)%numDirections
+            Directions.NORTH -> faceEast()
+            Directions.SOUTH -> faceWest()
+            Directions.EAST -> faceSouth()
+            Directions.WEST -> faceNorth()
         }
+    }
 
-        fun turnRight()
+    fun turnLeft()
+    {
+        when(positionWithDirection.direction)
         {
-                facing = (facing +1)%numDirections
+            Directions.NORTH -> faceWest()
+            Directions.SOUTH -> faceEast()
+            Directions.EAST -> faceNorth()
+            Directions.WEST -> faceSouth()
         }
+    }
 
-        fun move(){
-                when (facing){
-                        0 -> moveN()
-                        1 -> moveE()
-                        2 -> moveS()
-                        3 -> moveW()
+    private fun faceNorth() {
+        positionWithDirection.direction = Directions.NORTH
+    }
 
-                }
-        }
+    private fun faceSouth() {
+        positionWithDirection.direction = Directions.SOUTH
+    }
 
-        private fun moveN(){
-                y = ((y + 1)%size)
-        }
-        private fun moveS(){
-                y = ((y + 9)%size)
-        }
-        private fun moveW(){
-                x = ((x + 9)%size)
-        }
-        private fun moveE(){
-                x = ((x + 1)%size)
-        }
+    private fun faceWest() {
+        positionWithDirection.direction = Directions.WEST
+    }
+
+    private fun faceEast() {
+        positionWithDirection.direction = Directions.EAST
+    }
+
 
 
 }
-

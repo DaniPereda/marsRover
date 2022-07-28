@@ -6,7 +6,7 @@ import domain.Size
 
 class HardcodeComunicator() : Communicator {
     override fun retrieveOrders(): String {
-        return "MMMLMMRM"
+        return "MLLMMRM"
     }
 
     override fun retrieveInitialPosition(): Position {
@@ -16,7 +16,7 @@ class HardcodeComunicator() : Communicator {
 
     override fun retrieveInitialRowDirection(): Char {
         println("Please, Enter the rover facing direction ")
-        return 'S'
+        return 'W'
     }
 
 

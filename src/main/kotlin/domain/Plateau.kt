@@ -1,7 +1,6 @@
 package domain
 
-data class Plateau(val size:Size) {
-
+data class Plateau(val size:Size=Size(10,10)) {
     fun isInPlateau(position:Position):Boolean
     {
         if (isXCoordenateOK(position) && isYCoordenateOK(position)) {
